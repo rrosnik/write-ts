@@ -4,6 +4,6 @@ describe("Generator", () => {
     it("test", () => {
         const g = new Generator(["adasdasd"], {});
 
-        console.log(g.test());
+        console.log(g.enum());
     })
 });

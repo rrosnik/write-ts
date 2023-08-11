@@ -1,5 +1,6 @@
 import * as ts from "typescript";
 import { TypeGenerator } from "./typeGenerator";
+import { EnumGenerator } from "./enum/enumGenerator";
 
 export class Generator {
     private file: ts.SourceFile;
@@ -12,6 +13,15 @@ export class Generator {
     }
 
 
+    enum() {
+
+        const e = new EnumGenerator("eeeeeeeeeeeeeeeeeeeeeeee");
+        e.Modifiers.export();
+        e.addMember("a1");
+        e.addMember("a2");
+
+        return this.printer.printNode(ts.EmitHint.Unspecified, e.generate(), this.file);
+    }
     test() {
         const stringTypeReference = ts.factory.createTypeReferenceNode("string");
 
@@ -21,6 +31,7 @@ export class Generator {
         tg.setLiteralType(stringTypeReference);
         tg.addTypeParameter("pppppppppppppp")
         tg.addTypeParameter("qqqqqqqqqqqqqqq")
+
 
 
         return this.printer.printNode(ts.EmitHint.Unspecified, tg.generate(), this.file);
