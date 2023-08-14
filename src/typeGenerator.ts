@@ -1,6 +1,6 @@
 import * as ts from "typescript";
 import { ModifierLikeHandler } from "../modifiers/modiferlikeHandler";
-import { ModifierHandler } from "../modifiers/modiferHandler";
+import { ModifierHandler } from "./modiferHandler";
 import { TypeParameterDelarationGenerator } from "./TypeParameterDelarationGenerator";
 
 export type TypeType = {

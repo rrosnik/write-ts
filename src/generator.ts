@@ -1,6 +1,6 @@
 import * as ts from "typescript";
-import { TypeGenerator } from "./type/typeGenerator";
-import { EnumGenerator } from "./enum/enumGenerator";
+import { TypeGenerator } from "../typeGenerator";
+import { EnumGenerator } from "./enumGenerator";
 
 export class Generator {
     private file: ts.SourceFile;

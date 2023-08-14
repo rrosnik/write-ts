@@ -3,6 +3,6 @@ export * from "./generator/type";
 export * from "./generator/class";
 export * from "./generator/body";
 
-export * from "./generator/api";
+export * from "./api";
 
 export * from "./initTs";

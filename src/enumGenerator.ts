@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import { ModifierLikeHandler } from "../modifiers";
+import { ModifierLikeHandler } from "./modifiers";
 
 
 export class EnumGenerator {

@@ -1,4 +1,4 @@
-import { ClassGenerator } from "./class/classGenerator";
+import { ClassGenerator } from "./classGenerator";
 import * as ts from "typescript";
 
 

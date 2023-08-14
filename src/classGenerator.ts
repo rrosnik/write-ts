@@ -1,6 +1,6 @@
 import * as ts from "typescript";
-import { ModifierLikeHandler } from "../modifiers";
-import { TypeParameterDelarationGenerator } from "../type";
+import { ModifierLikeHandler } from "./generator/modifiers";
+import { TypeParameterDelarationGenerator } from "./generator/type";
 import { HeritageClauseGenerator } from "./HeritageClauseHandler";
 
 
