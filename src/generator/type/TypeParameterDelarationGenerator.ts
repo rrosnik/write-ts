@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import { ModifierHandler } from "./modifiers"
+import { ModifierHandler } from "../modifiers"
 
 export class TypeParameterDelarationGenerator {
     private _name: string;

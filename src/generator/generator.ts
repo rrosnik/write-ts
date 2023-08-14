@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import { TypeGenerator } from "./typeGenerator";
+import { TypeGenerator } from "./type/typeGenerator";
 import { EnumGenerator } from "./enum/enumGenerator";
 
 export class Generator {
@@ -22,7 +22,7 @@ export class Generator {
 
         return this.printer.printNode(ts.EmitHint.Unspecified, e.generate(), this.file);
     }
-    test() {
+    simpleType() {
         const stringTypeReference = ts.factory.createTypeReferenceNode("string");
 
 
