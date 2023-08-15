@@ -12,15 +12,12 @@ export class HeritageClauseGenerator {
 
     addIdentifier(name: string): this {
         if (!this._token) throw new Error("HeritageClauseGenerator.addIdentifier | At first you should detiemine the token for HeritageClause");
-        console.log("333333333333333333", name)
         const identifier = ts.factory.createIdentifier(name)
-        console.log("333333334444444444", name)
 
         if (this._token === ts.SyntaxKind.ExtendsKeyword)
             this._identifiers = [identifier];
         else
             this._identifiers.push(identifier)
-        console.log("4444444444444", name)
 
         return this;
     }

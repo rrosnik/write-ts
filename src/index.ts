@@ -1,8 +1,13 @@
-export * from "./generator/identifier";
-export * from "./generator/type";
-export * from "./generator/class";
-export * from "./generator/body";
-
-export * from "./api";
-
-export * from "./initTs";
+export * from "./IdentifierGenerator";
+export * from "./bodyGenerator";
+export * from "./classGenerator";
+export * from "./constructorGenerator";
+export * from "./enums";
+export * from "./expressions";
+export * from "./HeritageClauseHandler";
+export * from "./modifiers";
+export * from "./parameters";
+export * from "./properties";
+export * from "./statements";
+export * from "./types";
+export * from "./writer";
