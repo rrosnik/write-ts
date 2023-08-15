@@ -1,1 +1,1 @@
-this repository is to maintain the schema if the ifc in typescript language
+This package is a wrapper for typescript compiler to make code generation easy
