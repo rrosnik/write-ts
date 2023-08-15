@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import { ModifierLikeHandler } from "../modifiers";
+import { ModifierLikeHandler } from "./modifiers";
 
 export class ParameterGenerator {
     private _name: string;
@@ -9,12 +9,19 @@ export class ParameterGenerator {
 
     private _isSpread: boolean = false;
     private _isOptional: boolean = false;
-
+    private _identifier: ts.Identifier;
 
     private _initial: ts.Expression;
+    get Identifier(): ts.Identifier { return this._identifier }
 
-    constructor(name: string) {
-        this._name = name;
+    constructor(name: string | ts.Identifier) {
+        if (typeof name === "string") {
+            this._name = name;
+            this._identifier = ts.factory.createIdentifier(name);
+        } else {
+            this._name = name.text;
+            this._identifier = name;
+        }
     }
 
     spread(): this { this._isSpread = true; return this; }
@@ -37,6 +44,7 @@ export class ParameterGenerator {
 
         )
     }
+
 
 
 }

@@ -1,8 +1,8 @@
 
 // import "ts-polyfill";
 
-import { SyntaxKind, factory } from "typescript";
-import { nodeText, ConstructorGenerator, IdentifierGenerator, TypeGenerator, ParameterGenerator, StatementGenerator } from "../src";
+import ts, { SyntaxKind, factory } from "typescript";
+import { nodeText, ConstructorGenerator, IdentifierGenerator, TypeGenerator, ParameterGenerator, ClassGenerator, stringType, assignToClassProperty, expOrNull, numberType } from "../src";
 
 describe("test typescript compiler API directly", () => {
     test("idendifier Generatore", () => {
@@ -19,22 +19,39 @@ describe("test typescript compiler API directly", () => {
         const arrayString = factory.createArrayTypeNode(string);
 
         const cg = new TypeGenerator("MyType");
-        cg.setLiteralType(arrayString);
+        cg.setType(arrayString);
 
         expect(nodeText(cg.generate())).toEqual("type MyType = string[];")
 
         const f = new TypeGenerator("IfcText");
         f.Modifiers.export();
-        f.setLiteralType(cg.toArrayTypeNode())
+        f.setType(cg.toArrayTypeNode())
         expect(nodeText(f.generate())).toEqual("export type IfcText = MyType[];")
     });
 
+    test("class Generator", () => {
 
-    test("Statement Generator", () => {
-        const s = new StatementGenerator();
+        const ifcText = new TypeGenerator("IfcText");
+        ifcText.Modifiers.export();
+        ifcText.setType(stringType);
 
-        console.log(nodeText(s.generate()));
+        const c = new ClassGenerator("IfcElement");
+        c.extends("Elements")
+        const property = c.addProperty("_height").private().setType(numberType);
+        const o = c.setConstructor();
+        const param1 = o.addParameter("height").setType(ifcText.Refrence).optional();
+
+        const body = o.setBody();
+        body.addExpression(assignToClassProperty(property.Identifier, expOrNull(param1.Identifier)))
 
 
+        c.addGetter("Height")
+            .setType(ifcText.Refrence)
+            .readonly().private()
+            .setBody()
+            .returnsProperty(property.Identifier);
+
+
+        console.log(nodeText(c.generate()));
     })
 });
