@@ -1,13 +1,12 @@
-
 // import "ts-polyfill";
 
 import ts, { SyntaxKind, factory } from "typescript";
-import { nodeText, ConstructorGenerator, IdentifierGenerator, TypeGenerator, ParameterGenerator, ClassGenerator, stringType, assignToClassProperty, expOrNull, numberType } from "../src";
+import { IdentifierGenerator, TypeGenerator, ClassGenerator, stringType, assignToClassProperty, expOrNull, numberType, Writer } from "../src";
 
 describe("test typescript compiler API directly", () => {
     test("idendifier Generatore", () => {
         const cg = new IdentifierGenerator("hamid");
-        expect(nodeText(cg.generate())).toEqual("hamid")
+        expect(new Writer(cg.generate()).print()).toEqual("hamid")
     });
 
     test("TypeGenerator testing", () => {
@@ -21,12 +20,12 @@ describe("test typescript compiler API directly", () => {
         const cg = new TypeGenerator("MyType");
         cg.setType(arrayString);
 
-        expect(nodeText(cg.generate())).toEqual("type MyType = string[];")
+        expect(new Writer(cg.generate()).print()).toEqual("type MyType = string[];")
 
         const f = new TypeGenerator("IfcText");
         f.Modifiers.export();
         f.setType(cg.toArrayTypeNode())
-        expect(nodeText(f.generate())).toEqual("export type IfcText = MyType[];")
+        expect(new Writer(f.generate()).print()).toEqual("export type IfcText = MyType[];")
     });
 
     test("class Generator", () => {
@@ -51,7 +50,7 @@ describe("test typescript compiler API directly", () => {
             .setBody()
             .returnsProperty(property.Identifier);
 
+        console.log(new Writer(c.generate()).print());
 
-        console.log(nodeText(c.generate()));
     })
 });

@@ -10,4 +10,4 @@ export * from "./parameters";
 export * from "./properties";
 export * from "./statements";
 export * from "./types";
-export * from "./api";
+export * from "./writer";
