@@ -7,7 +7,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    "declarationDir": "dist/types",
+    "declarationDir": "dist/typings",
     "esModuleInterop": true
   },
   "include": [

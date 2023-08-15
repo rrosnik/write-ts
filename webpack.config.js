@@ -15,7 +15,7 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map',
+    devtool: 'none',
     resolve: {
         extensions: [".ts", ".js"],
     },

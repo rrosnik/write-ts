@@ -3,7 +3,7 @@
   "description": "This package is a wrapper for typescript compiler to make code generation easy",
   "version": "0.0.4",
   "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/typings/index.d.ts",
   "scripts": {
     "build": "webpack",
     "test": "jest"
@@ -14,7 +14,6 @@
     "node-polyfill-webpack-plugin": "^2.0.1",
     "ts-jest": "^29.1.1",
     "ts-loader": "^9.4.4",
-    "ts-node": "^10.9.1",
     "ts-polyfill": "^3.8.2",
     "typescript": "^5.0.2",
     "webpack": "^5.88.2",
@@ -36,6 +35,7 @@
   },
   "homepage": "https://github.com/RezaRostamiNikoo/write-ts/blob/master/README.md",
   "files": [
-    "package.json"
+    "package.json",
+    "dist"
   ]
 }
