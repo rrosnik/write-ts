@@ -1,3 +1,5 @@
+name: "publish to the npm registry"
+
 on:
   push:
     branches: master
