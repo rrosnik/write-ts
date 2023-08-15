@@ -21,5 +21,23 @@
     "webpack-cli": "^5.1.4",
     "xsd-parser": "^0.0.2",
     "xsd2ts": "^0.9.17"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RezaRostamiNikoo/write-ts"
+  },
+  "keywords": [
+    "typescript",
+    "generator",
+    "code generator"
+  ],
+  "author": "Reza Rostaminikoo",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/RezaRostamiNikoo/write-ts/issues"
+  },
+  "homepage": "https://github.com/RezaRostamiNikoo/write-ts/blob/master/README.md",
+  "files": [
+    "package.json"
+  ]
 }
