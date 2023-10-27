@@ -8,7 +8,8 @@
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "dist/typings",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*.ts"
