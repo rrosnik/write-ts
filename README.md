@@ -1,3 +1,7 @@
+# write-ts
+
+## Some Example
+
 ### to define query for a type from another type
 
 ```typescript
@@ -22,11 +26,10 @@ const a = factory.createTypeOperatorNode(SyntaxKind.KeyOfKeyword,)
 //  = keyof/readonly/unique ...
 ```
 
-### to define 
+### to define
 
 ```typescript
 const a = factory.createTypePredicateNode(undefined, "someName",undefined) 
 
 //  someName is ...
 ```
-

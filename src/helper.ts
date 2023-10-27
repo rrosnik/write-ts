@@ -26,3 +26,7 @@ export function createTypeReferenceNode(referencedTypeName: string | ts.EntityNa
 export function createIdentifier(name: string): ts.Identifier {
     return ts.factory.createIdentifier(name);
 }
+
+export function createArrayTypeNode(typeNode: ts.TypeNode): ts.ArrayTypeNode {
+    return ts.factory.createArrayTypeNode(typeNode)
+}

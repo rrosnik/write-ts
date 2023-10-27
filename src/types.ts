@@ -12,11 +12,24 @@ export class TypeParameterDelarationGenerator {
         this._name = name
     }
 
-    setConstraint(constraint: ts.TypeNode): TypeParameterDelarationGenerator {
+    /**
+     * @example
+     * parameterName extends `constraint as TypeNode` = `default TypeNode`
+     * @param {ts.TypeNode} constraint 
+     * @returns {this}
+     */
+    setConstraint(constraint: ts.TypeNode): this {
         this._constraint = constraint
         return this
     }
-    setDefaultType(defaultType: ts.TypeNode): TypeParameterDelarationGenerator {
+
+    /**
+     * @example
+     * type aTypeIdentifier = mainType<parameterName extends constraint = defaultType >
+     * @param {ts.TypeNode} defaultType 
+     * @returns {this}
+     */
+    setDefaultType(defaultType: ts.TypeNode): this {
         this._defaultType = defaultType
         return this
     }
@@ -90,13 +103,14 @@ export class TypeGenerator {
      * @example
      * const t = new TypeGenerator('typeName')
      * t.setType('literal')
-     * t.addGenericType('generic')
-     * => // type typeName<generic> = literal
+     * t.addGenericType('generic','constraint','defaultType')
      * 
+     * => // type typeName<generic> = literal
+     * type typeName = referenceType<generic extends constraint = defaultType, ... >
      * @param {string} name 
      * @returns {this}
      */
-    addGenericType(name: string): this {
+    addGenericType(name: string, constraint?: ts.TypeNode, defaultType?: ts.TypeNode): this {
         const tp = new TypeParameterDelarationGenerator(name)
         this._typeParameters.push(tp)
         return this
