@@ -1,7 +1,7 @@
 {
   "name": "write-ts",
   "description": "This package is a wrapper for typescript compiler to make code generation easy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "types": "dist/typings/index.d.ts",
   "scripts": {
