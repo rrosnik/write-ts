@@ -2,10 +2,10 @@ import * as ts from "typescript";
 import { ModifierLikeHandler } from "./modifiers";
 import { TypeParameterDelarationGenerator } from "./types";
 
-import { HeritageClauseGenerator } from "./HeritageClauseHandler";
 import { ConstructorGenerator } from "./constructorGenerator";
 import { PropertyGenerator } from "./properties";
 import { GetterGenerator } from "./functions";
+import { HeritageClauseGenerator } from './HeritageClauseHandler';
 
 
 export class ClassGenerator {
@@ -14,8 +14,7 @@ export class ClassGenerator {
     private _modifiers: ModifierLikeHandler = new ModifierLikeHandler();
     private _typeParameters: TypeParameterDelarationGenerator[] = [];
     private _members: ts.ClassElement[] = [];
-    private _extended_heritageClause: HeritageClauseGenerator;
-    private _implemented_heritageClause: HeritageClauseGenerator;
+    private _heritageClauses: HeritageClauseGenerator = new HeritageClauseGenerator();
 
     private _constructor: ConstructorGenerator;
     private _properties: PropertyGenerator[] = [];
@@ -27,34 +26,29 @@ export class ClassGenerator {
         this._name = className;
     }
 
-    extends(baseClass: string): this {
-        console.log("1111111111111", baseClass)
-        if (!this._extended_heritageClause) {
-            this._extended_heritageClause = new HeritageClauseGenerator();
-            this._extended_heritageClause.toBeExtended();
-        }
-        console.log("22222222222222222222", baseClass)
-
-        this._extended_heritageClause.addIdentifier(baseClass);
-        return this;
+    /**
+     * add `extends` and heritage class to this class
+     * @param {ts.Identifier} identifier 
+     * @param {ts.TypeNode[]} generics 
+     * @returns 
+     */
+    extends(identifier: ts.Identifier, generics?: ts.TypeNode[]): this {
+        this._heritageClauses.extends(identifier, generics);
+        return this
     }
 
-    implements(name: string): this {
-        if (!this._implemented_heritageClause) {
-            this._implemented_heritageClause = new HeritageClauseGenerator();
-            this._implemented_heritageClause.toBeImplemented();
-        }
-        this._implemented_heritageClause.addIdentifier(name)
-        return this;
+    /**
+     * add `implements` and heritage class to this class
+     * @param {ts.Identifier} identifier 
+     * @param {ts.TypeNode[]} generics 
+     * @returns 
+     */
+    implements(identifier: ts.Identifier, generics?: ts.TypeNode[]): this {
+        this._heritageClauses.implements(identifier, generics)
+        return this
     }
 
     generate(): ts.ClassDeclaration {
-
-        const extimp = [];
-        if (this._extended_heritageClause)
-            extimp.push(this._extended_heritageClause.generate());
-        if (this._implemented_heritageClause)
-            extimp.push(this._implemented_heritageClause.generate());
 
         // add all properties to members
         this._properties.forEach(p => this._members.push(p.generate()));
@@ -67,10 +61,11 @@ export class ClassGenerator {
             this._modifiers.toArray(),
             this._name,
             this._typeParameters.map(t => t.generate()),
-            extimp.length ? extimp : undefined,
+            this._heritageClauses.generate(),
             this._members
         )
     }
+
 
     setConstructor(): ConstructorGenerator {
         if (this._constructor) return this._constructor;
