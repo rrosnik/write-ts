@@ -1,4 +1,4 @@
-export * from "./IdentifierGenerator";
+export * from "./helper";
 export * from "./bodyGenerator";
 export * from "./classGenerator";
 export * from "./constructorGenerator";
