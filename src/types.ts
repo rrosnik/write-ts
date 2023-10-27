@@ -1,5 +1,6 @@
 import * as ts from "typescript"
 import { ModifierLikeHandler, ModifierHandler } from "./modifiers"
+import { createIdentifier, createTypeReferenceNode } from './helper'
 
 export class TypeParameterDelarationGenerator {
     private _name: string
@@ -45,23 +46,23 @@ export class TypeGenerator {
     /** holds modifiers or decorators */
     get Modifiers(): ModifierLikeHandler { return this._modifiers }
 
-    /** holds identifier of type */
+    /** holds identifier of type - identifier is the left side of a type definition - its name*/
     get Identifier(): ts.Identifier { return this._identifier }
 
-    /** it is used for setting literal type to define another type
+    /** it is used for setting literal type to define another type - it is the right side of a type definition as an literal but referenced to another type
      * @example
-     * type "reference_of_this_type" = a typenode
-     * type anothertype = "reference_of_this_type"
+     * type "identifier" = a typenode
+     * type anothertype = "reference_to_identifier"
      */
     get Refrence(): ts.TypeNode {
         if (this._reference) return this._reference
-        return (this._reference = ts.factory.createTypeReferenceNode(this._identifier))
+        return (this._reference = createTypeReferenceNode(this._identifier))
     }
 
     constructor(name: string | ts.Identifier) {
         if (typeof name === "string") {
             this._name = name
-            this._identifier = ts.factory.createIdentifier(name)
+            this._identifier = createIdentifier(name)
         } else {
             this._name = name.text
             this._identifier = name
@@ -84,10 +85,21 @@ export class TypeGenerator {
         return this
     }
 
-
-    addTypeParameter(name: string) {
+    /**
+     * add a generic type to this type definition
+     * @example
+     * const t = new TypeGenerator('typeName')
+     * t.setType('literal')
+     * t.addGenericType('generic')
+     * => // type typeName<generic> = literal
+     * 
+     * @param {string} name 
+     * @returns {this}
+     */
+    addGenericType(name: string): this {
         const tp = new TypeParameterDelarationGenerator(name)
         this._typeParameters.push(tp)
+        return this
     }
 
     /**
