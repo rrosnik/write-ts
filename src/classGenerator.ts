@@ -1,30 +1,36 @@
-import * as ts from "typescript";
-import { ModifierLikeHandler } from "./modifiers";
-import { TypeParameterDelarationGenerator } from "./types";
+import * as ts from "typescript"
+import { ModifierLikeHandler } from "./modifiers"
+import { TypeParameterDelarationGenerator } from "./types"
 
-import { ConstructorGenerator } from "./constructorGenerator";
-import { PropertyGenerator } from "./properties";
-import { GetterGenerator } from "./functions";
-import { HeritageClauseGenerator } from './HeritageClauseHandler';
+import { ConstructorGenerator } from "./constructorGenerator"
+import { PropertyGenerator } from "./properties"
+import { GetterGenerator } from "./functions"
+import { HeritageClauseGenerator } from './HeritageClauseHandler'
+import { createIdentifier } from './helper'
 
 
 export class ClassGenerator {
-    private _name: string;
+    private _name: string
+    private _identifier: ts.Identifier
 
-    private _modifiers: ModifierLikeHandler = new ModifierLikeHandler();
-    private _typeParameters: TypeParameterDelarationGenerator[] = [];
-    private _members: ts.ClassElement[] = [];
-    private _heritageClauses: HeritageClauseGenerator = new HeritageClauseGenerator();
+    private _modifiers: ModifierLikeHandler = new ModifierLikeHandler()
+    private _typeParameters: TypeParameterDelarationGenerator[] = []
+    private _members: ts.ClassElement[] = []
+    private _heritageClauses: HeritageClauseGenerator = new HeritageClauseGenerator()
 
-    private _constructor: ConstructorGenerator;
-    private _properties: PropertyGenerator[] = [];
+    private _constructor: ConstructorGenerator
+    private _properties: PropertyGenerator[] = []
 
-    private _getters: GetterGenerator[] = [];
+    private _getters: GetterGenerator[] = []
 
 
     constructor(className: string) {
-        this._name = className;
+        this._name = className
+        this._identifier = createIdentifier(className)
     }
+
+    get Identifier(): ts.Identifier { return this._identifier }
+    get Modifiers(): ModifierLikeHandler { return this._modifiers }
 
     /**
      * add `extends` and heritage class to this class
@@ -33,7 +39,7 @@ export class ClassGenerator {
      * @returns 
      */
     extends(identifier: ts.Identifier, generics?: ts.TypeNode[]): this {
-        this._heritageClauses.extends(identifier, generics);
+        this._heritageClauses.extends(identifier, generics)
         return this
     }
 
@@ -68,21 +74,21 @@ export class ClassGenerator {
 
 
     setConstructor(): ConstructorGenerator {
-        if (this._constructor) return this._constructor;
-        this._constructor = new ConstructorGenerator();
-        return this._constructor;
+        if (this._constructor) return this._constructor
+        this._constructor = new ConstructorGenerator()
+        return this._constructor
     }
 
     addProperty(name: string): PropertyGenerator {
-        const result = new PropertyGenerator(name);
-        this._properties.push(result);
-        return result;
+        const result = new PropertyGenerator(name)
+        this._properties.push(result)
+        return result
     }
 
     addGetter(name: string | ts.Identifier) {
-        const result = new GetterGenerator(name);
-        this._getters.push(result);
-        return result;
+        const result = new GetterGenerator(name)
+        this._getters.push(result)
+        return result
     }
 
 }
