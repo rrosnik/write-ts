@@ -2,7 +2,7 @@ export * from "./helper";
 export * from "./bodyGenerator";
 export * from "./classGenerator";
 export * from "./constructorGenerator";
-export * from "./enums";
+export * from "./EnumGenerator";
 export * from "./expressions";
 export * from "./HeritageClauseHandler";
 export * from "./modifiers";
