@@ -27,6 +27,22 @@ export function createIdentifier(name: string): ts.Identifier {
     return ts.factory.createIdentifier(name);
 }
 
+/**
+ * create a type as an Array
+ * @param {ts.TypeNode} typeNode 
+ * @returns {ts.ArrayTypeNode}
+ */
 export function createArrayTypeNode(typeNode: ts.TypeNode): ts.ArrayTypeNode {
     return ts.factory.createArrayTypeNode(typeNode)
+}
+
+/**
+ * creates a union type
+ * @example
+ * a | b | c | ...
+ * @param typeNodes 
+ * @returns 
+ */
+export function createUnionTypeNode(...typeNodes: ts.TypeNode[]) {
+    return ts.factory.createUnionTypeNode(typeNodes)
 }
