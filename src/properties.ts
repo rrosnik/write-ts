@@ -22,8 +22,8 @@ export class PropertyGenerator {
         }
     }
 
-    optional(): this { this._isOptional = true; return this; }
-    required(): this { this._isOptional = false; return this; }
+    optional(optional: boolean = true): this { this._isOptional = optional; return this; }
+    required(required: boolean = true): this { this._isOptional = required; return this; }
     setType(typeNode: ts.TypeNode): this { this._type = typeNode; return this; }
     init(expression: ts.Expression): this { this._initial = expression; return this; }
     private(): this { this._modifiers.private(); return this; }
