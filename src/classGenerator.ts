@@ -80,6 +80,7 @@ export class ClassGenerator {
     }
 
     addProperty(name: string): PropertyGenerator {
+        if (!name) throw Error("ClassGenerator.addProperty | the name should be defined")
         const result = new PropertyGenerator(name)
         this._properties.push(result)
         return result
