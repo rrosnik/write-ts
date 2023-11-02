@@ -11,3 +11,5 @@ export * from "./properties";
 export * from "./statements";
 export * from "./types";
 export * from "./writer";
+export * from './TypeLiteralGenerator'
+export * from './IntersectionTypeGenerator'

@@ -33,3 +33,25 @@ const a = factory.createTypePredicateNode(undefined, "someName",undefined)
 
 //  someName is ...
 ```
+
+### to define a literal type
+
+```typescript
+
+ts.factory.createTypeLiteralNode(
+            [
+                ts.factory.createPropertySignature(
+                    undefined,
+                    "propertySignatureName",
+                    undefined,
+                    ts.factory.createTypeReferenceNode("tttttttttt")
+                )
+
+            ]
+        )
+
+// result 
+// {
+//      propertySignatureName: tttttttttt;·
+// }
+```
