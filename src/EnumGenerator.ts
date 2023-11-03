@@ -1,5 +1,6 @@
 import * as ts from "typescript";
 import { ModifierLikeHandler } from "./modifiers";
+import { Writer } from './writer';
 
 
 export class EnumGenerator {
@@ -25,5 +26,9 @@ export class EnumGenerator {
             this._name,
             this._enumMembers
         )
+    }
+
+    toString(): string {
+        return new Writer(this.generate()).print()
     }
 }

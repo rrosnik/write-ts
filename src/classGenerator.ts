@@ -7,6 +7,7 @@ import { PropertyGenerator } from "./properties"
 import { GetterGenerator } from "./functions"
 import { HeritageClauseGenerator } from './HeritageClauseHandler'
 import { createIdentifier } from './helper'
+import { Writer } from './writer'
 
 
 export class ClassGenerator {
@@ -92,4 +93,8 @@ export class ClassGenerator {
         return result
     }
 
+
+    toString(): string {
+        return new Writer(this.generate()).print()
+    }
 }

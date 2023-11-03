@@ -1,4 +1,5 @@
 import ts from 'typescript'
+import { Writer } from './writer'
 
 /** this class is to create literal type
  * @example
@@ -27,5 +28,9 @@ export class TypeLiteralGenerator {
 
     generate(): ts.TypeLiteralNode {
         return ts.factory.createTypeLiteralNode(this._property_signatures)
+    }
+
+    toString(): string {
+        return new Writer(this.generate()).print()
     }
 }
